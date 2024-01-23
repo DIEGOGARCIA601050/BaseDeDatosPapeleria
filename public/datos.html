@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 1rem;
+        }
+
+        h1 {
+            text-align: center
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script type="module">
+        fetch(`http://localhost:3000/datos`)
+            .then(res => res.json())
+            .then(Articulos => {
+                const html = Articulos.map(Articulo => {
+                    return `
+                <tr data-id="${Articulo.id}">
+                    <td>${Articulo.nombre}</td>
+                    <td>${Articulo.apellido}</td>
+                    <td>${Articulo.contrasena}</td>
+                    <td>${Articulo.edad}</td>
+                </tr>
+            `
+                }).join('')
+
+                document.querySelector('.data').innerHTML = html
+            })
+    </script>
+</head>
+
+<body>
+    <h1>Registros</h1>
+    <main>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>
+                            Nombre
+                        </strong>
+                    </td>
+                    <td><strong>
+                            Apellido
+                        </strong></td>
+                    <td><strong>
+                            Contraseña
+                        </strong></td>
+                    <td><strong>
+                            Edad
+                        </strong></td>
+                </tr>
+            <tbody class="data"></tbody>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

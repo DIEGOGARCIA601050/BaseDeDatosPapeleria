@@ -1,8 +1,8 @@
 import { app, json, e } from "./express.js";
-import { client, pool } from "./database/postgresql.js";
+import { pool } from "./database/postgresql.js";
 import path, {} from 'node:path'
 
-const PORT = process.env.PORT || 3000
+export const PORT = process.env.PORT || 3000
 // client.connect();
 
 
@@ -17,8 +17,12 @@ app.get('/datos', (req, res) => {
           console.error(err);
           return;
         }
-        res.send(resp.rows)
+        const data = resp.rows
+        res.send(data)
       });
+})
+app.get('/datos/catalogo', (req, res) => {
+  res.sendFile(path.resolve('./public/datos.html'))
 })
 app.get('/datos/crear-nuevo', (req, res) => {
     res.sendFile(path.resolve('./public/crear-nuevo.html'))
