@@ -1,10 +1,15 @@
 import { app, json, e } from "./express.js";
 import { pool } from "./database/postgresql.js";
+//import { Cors } from "./cors.js";
 import path, {} from 'node:path'
 
 export const PORT = process.env.PORT || 3000
 // client.connect();
 
+app.use(function(req, res, next) {
+  res.set("Access-Control-Allow-Origin", "https://bookish-space-halibut-qrgpq7vqjjrf46vr-5173.app.github.dev");
+  next();
+});
 
 app.use(e.static('public'))
 app.use(json())
