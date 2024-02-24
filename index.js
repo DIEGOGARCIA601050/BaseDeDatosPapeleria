@@ -11,6 +11,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(function(req, res, next) {
+  res.set("Access-Control-Allow-Origin", "https://verbose-orbit-g9w7q4x4x672wj4q-3000.app.github.dev");
+  next();
+});
+
 app.use(e.static('public'))
 app.use(json())
 app.get('/', (req, res) => {
