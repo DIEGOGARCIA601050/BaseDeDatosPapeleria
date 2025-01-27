@@ -1,6 +1,6 @@
 import { app, json, e } from "./express.js";
 import { pool } from "./database/postgresql.js";
-//import { Cors } from "./cors.js";
+
 import path, {} from 'node:path'
 
 export const PORT = process.env.PORT || 3000
@@ -13,6 +13,7 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
   res.set("Access-Control-Allow-Origin", "https://verbose-orbit-g9w7q4x4x672wj4q-3000.app.github.dev");
+  res.set("Access-Control-Allow-Origin", `http://localhost:${PORT}`);
   next();
 });
 
